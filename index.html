@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>میزان کارکرد کارکنان</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>میزان کارکرد کارکنان</h1>
+    </header>
+
+    <section id="fixed-section">
+        <form id="initial-form">
+            <label for="base-name">نام پایگاه:</label>
+            <select id="base-name" name="base-name" required>
+                <option value="فرهنگ">فرهنگ</option>
+                <option value="فلسطین">فلسطین</option>
+            </select>
+
+            <label for="location-type">نوع پایگاه:</label>
+            <select id="location-type" name="location-type">
+                <option value="شهری">شهری</option>
+                <option value="جاده‌ای">جاده‌ای</option>
+            </select>
+
+            <label for="month-year">ماه و سال:</label>
+            <input type="text" id="month-year" name="month-year" required>
+
+            <button type="submit">ثبت</button>
+        </form>
+    </section>
+
+    <section id="dynamic-section" style="display:none;">
+        <form id="staff-form">
+            <label for="staff-name">نام پرسنل:</label>
+            <input list="staff-names" id="staff-name" name="staff-name" required>
+            <datalist id="staff-names">
+                <option value="علی">
+                <option value="حسین">
+                <option value="محمد">
+            </datalist>
+
+            <label for="productive">بهره‌ور:</label>
+            <input type="checkbox" id="productive" name="productive">
+
+            <label for="shift-type">نوع شیفت:</label>
+            <div id="shift-options">
+                <input type="checkbox" id="shift-24-normal" name="shift-type" value="۲۴ عادی">
+                <label for="shift-24-normal">۲۴ عادی</label>
+                <div id="shift-24-normal-details" class="shift-details"></div>
+
+                <input type="checkbox" id="shift-24-holiday" name="shift-type" value="۲۴ تعطیل">
+                <label for="shift-24-holiday">۲۴ تعطیل</label>
+                <div id="shift-24-holiday-details" class="shift-details"></div>
+
+                <input type="checkbox" id="shift-long-normal" name="shift-type" value="لانگ عادی">
+                <label for="shift-long-normal">لانگ عادی</label>
+                <div id="shift-long-normal-details" class="shift-details"></div>
+
+                <input type="checkbox" id="shift-long-holiday" name="shift-type" value="لانگ تعطیل">
+                <label for="shift-long-holiday">لانگ تعطیل</label>
+                <div id="shift-long-holiday-details" class="shift-details"></div>
+
+                <input type="checkbox" id="shift-night" name="shift-type" value="شب">
+                <label for="shift-night">شب</label>
+                <div id="shift-night-details" class="shift-details"></div>
+
+                <input type="checkbox" id="shift-full-leave" name="shift-type" value="مرخصی کامل">
+                <label for="shift-full-leave">مرخصی کامل</label>
+                <div id="shift-full-leave-details" class="shift-details"></div>
+            </div>
+
+            <label for="misc-hours">ساعات متفرقه:</label>
+            <div>
+                <input type="text" id="misc-hours-count" name="misc-hours-count" placeholder="تعداد">
+                <input type="text" id="misc-hours-date" name="misc-hours-date" placeholder="تاریخ">
+            </div>
+
+            <label for="hourly-leave">مرخصی ساعتی:</label>
+            <div>
+                <input type="text" id="hourly-leave-count" name="hourly-leave-count" placeholder="تعداد">
+                <input type="text" id="hourly-leave-date" name="hourly-leave-date" placeholder="تاریخ">
+            </div>
+
+            <label for="missions-count">تعداد ماموریت:</label>
+            <input type="text" id="missions-count" name="missions-count">
+
+            <!-- New field added here -->
+            <label for="meal-count">تعداد وعده غذا:</label>
+            <input type="text" id="meal-count" name="meal-count">
+
+            <label for="notes">ملاحظات:</label>
+            <input type="text" id="notes" name="notes">
+
+            <button type="submit">ثبت</button>
+        </form>
+    </section>
+
+    <section id="result-section" style="display:none;">
+        <h2 id="table-header-1"></h2>
+        <table id="result-table-1">
+            <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>بهره‌ور</th>
+                    <th>شهری/جاده‌ای</th>
+                    <th>تعداد ۲۴ عادی</th>
+                    <th>تعداد ۲۴ تعطیل</th>
+                    <th>تعداد لانگ عادی</th>
+                    <th>تعداد لانگ تعطیل</th>
+                    <th>تعداد شب</th>
+                    <th>تعداد مرخصی کامل</th>
+                    <th>ساعات متفرقه</th>
+                    <th>مرخصی ساعتی</th>
+                    <th>تعداد ماموریت</th>
+                    <th>تعداد وعده غذا</th>
+                    <th>ملاحظات</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <h2 id="table-header-2"></h2>
+        <table id="result-table-2">
+            <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>تاریخ ۲۴ عادی</th>
+                    <th>تاریخ ۲۴ تعطیل</th>
+                    <th>تاریخ لانگ عادی</th>
+                    <th>تاریخ لانگ تعطیل</th>
+                    <th>تاریخ شب</th>
+                    <th>تاریخ مرخصی کامل</th>
+                    <th>تاریخ ساعات متفرقه</th>
+                    <th>تاریخ مرخصی ساعتی</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!-- Button to capture and download the table as an image -->
+        <button id="download-table-1">دانلود جدول اول</button>
+        <button id="download-table-2">دانلود جدول دوم</button>
+        <button id="download-csv-1">دانلود CSV جدول اول</button>
+        <button id="download-csv-2">دانلود CSV جدول دوم</button>
+    </section>
+</body>
+</html>
